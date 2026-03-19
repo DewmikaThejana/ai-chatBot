@@ -4,7 +4,7 @@ async function getAIResponse(messages) {
       method: "POST",
       headers: {
         Authorization:
-          "Bearer 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",
+          "Bearer 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",
         "HTTP-Referer": "http://localhost/ai_practical_2/index.html", // Optional. Site URL for rankings on openrouter.ai.
         "X-OpenRouter-Title": "Adacore Chatbot", // Optional. Site title for rankings on openrouter.ai.
         "Content-Type": "application/json",
