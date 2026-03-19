@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adacore Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4f46e5", // Indigo 600
+              secondary: "#ec4899", // Pink 500
+            },
+            boxShadow: {
+              glass: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500 h-screen w-screen m-0 p-4 md:p-8 flex flex-col items-center justify-center overflow-hidden"
+  >
+    <!-- Outermost container with Glassmorphism and 3D shadow -->
+    <div
+      class="relative w-full h-full max-w-5xl rounded-3xl bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl border border-white/50 dark:border-gray-700/50 shadow-glass flex flex-col overflow-hidden ring-1 ring-white/60 dark:ring-gray-700/50"
+    >
+      <!-- Header with 3D elements -->
+      <header
+        class="bg-gradient-to-r from-primary to-secondary text-white p-5 flex justify-between items-center z-10 shadow-lg border-b border-white/20"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center font-bold text-2xl shadow-[inset_0_2px_4px_rgba(255,255,255,0.6),0_4px_8px_rgba(0,0,0,0.2)] border border-white/30 transform transition hover:scale-105"
+          >
+            D
+          </div>
+          <div>
+            <h1 class="font-extrabold text-xl tracking-wide drop-shadow-md">
+              Dewmika T Chatbot
+            </h1>
+            <p
+              class="text-sm text-indigo-100 flex items-center gap-2 font-medium"
+            >
+              <span
+                class="w-3 h-3 bg-green-400 rounded-full inline-block shadow-[0_0_8px_theme('colors.green.400')]"
+              ></span>
+              Online
+            </p>
+          </div>
+        </div>
+
+        <!-- Theme Toggle with 3D button styling -->
+        <button
+          id="theme-toggle"
+          class="p-3 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),0_4px_6px_rgba(0,0,0,0.1)] border border-white/20"
+          aria-label="Toggle dark mode"
+        >
+          <!-- Sun Icon -->
+          <svg
+            id="theme-toggle-light-icon"
+            class="w-6 h-6 hidden drop-shadow-md"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <!-- Moon Icon -->
+          <svg
+            id="theme-toggle-dark-icon"
+            class="w-6 h-6 hidden drop-shadow-md"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+            ></path>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Chat Output -->
+      <main
+        id="chat-container"
+        class="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth z-0 relative"
+      >
+        <!-- Pattern background overlay -->
+        <div
+          class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 dark:opacity-10 pointer-events-none"
+        ></div>
+
+        <!-- Initial Bot Message -->
+        <div class="flex gap-4 relative z-10">
+          <div
+            class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-primary to-secondary text-white rounded-full flex items-center justify-center font-bold shadow-[0_4px_10px_rgba(79,70,229,0.4)] border border-white/20"
+          >
+            D
+          </div>
+          <div
+            class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md text-gray-800 dark:text-gray-100 rounded-2xl rounded-tl-none px-5 py-3 shadow-[0_4px_15px_rgba(0,0,0,0.05)] border border-white/50 dark:border-gray-700 max-w-[80%] transform transition hover:-translate-y-1"
+          >
+            Hello! I'm the Dewmika T Chatbot. How can I help you today?
+          </div>
+        </div>
+      </main>
+
+      <!-- User Input Area -->
+      <footer
+        class="p-5 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl border-t border-white/40 dark:border-gray-700/50 relative z-10 w-full"
+      >
+        <form id="chat-form" class="flex gap-4 w-full">
+          <!-- 3D Input Field -->
+          <div class="flex-1 relative">
+            <input
+              type="text"
+              id="user-input"
+              class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-full pl-6 pr-4 py-4 focus:outline-none focus:ring-4 focus:ring-primary/30 placeholder-gray-500 dark:placeholder-gray-400 border border-gray-200 dark:border-gray-700 shadow-[inset_0_2px_6px_rgba(0,0,0,0.08)] transition-all font-medium text-lg"
+              placeholder="Type your message..."
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <!-- 3D Send Button -->
+          <button
+            type="submit"
+            id="send-button"
+            class="bg-gradient-to-br from-primary to-secondary hover:from-indigo-600 hover:to-pink-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 transition-all focus:outline-none focus:ring-4 focus:ring-primary/40 shadow-[0_6px_15px_rgba(79,70,229,0.4),inset_0_-3px_5px_rgba(0,0,0,0.1),inset_0_3px_5px_rgba(255,255,255,0.3)] transform hover:-translate-y-1 active:translate-y-1 active:shadow-[0_2px_5px_rgba(79,70,229,0.4),inset_0_3px_5px_rgba(0,0,0,0.2)]"
+          >
+            <svg
+              class="w-6 h-6 transform rotate-90 drop-shadow-md"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"
+              ></path>
+            </svg>
+          </button>
+        </form>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="openrouter.js"></script>
+  </body>
+</html>
